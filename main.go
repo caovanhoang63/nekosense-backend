@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"nekosense-backend/handlers"
 	"net/http"
 	"os"
 	"time"
@@ -31,6 +32,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to MongoDB: %v", err)
 	}
+	database := client.Database("nekosense")
+
+	ginHandler := handlers.NewGinHandler(database)
 
 	defer func() {
 		if err = client.Disconnect(ctx); err != nil {
@@ -58,6 +62,8 @@ func main() {
 			"message": "database is connected",
 		})
 	})
+
+	MainRouter(router, ginHandler)
 
 	log.Println("Starting server on :8080")
 	router.Run(":8080")
