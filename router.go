@@ -11,4 +11,5 @@ func MainRouter(router *gin.Engine, g *handlers.GinHandler) {
 			"message": "pong",
 		})
 	})
+	router.POST("/event", g.OnNekoSenseEvent())
 }
