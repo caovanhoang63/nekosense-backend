@@ -29,6 +29,8 @@ func (g *GinHandler) GetHeatMaps() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		pipeline := mongo.Pipeline{
 			bson.D{{Key: "$match", Value: bson.D{{Key: "event", Value: "heatMap"}}}},
+			bson.D{{Key: "$sort", Value: bson.D{{Key: "_id", Value: -1}}}},
+			bson.D{{Key: "$limit", Value: 10}},
 			bson.D{{Key: "$unwind", Value: "$data.mousePositions"}},
 			bson.D{{Key: "$replaceRoot", Value: bson.D{{Key: "newRoot", Value: "$data.mousePositions"}}}},
 		}
