@@ -12,4 +12,7 @@ func MainRouter(router *gin.Engine, g *handlers.GinHandler) {
 		})
 	})
 	router.POST("/event", g.OnNekoSenseEvent())
+	router.GET("/clicks", g.GetClicks())
+	router.GET("/performance", g.GetPagePerformances())
+
 }

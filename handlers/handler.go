@@ -31,6 +31,9 @@ func (g *GinHandler) OnNekoSenseEvent() gin.HandlerFunc {
 		case "heatMap":
 			err = g.onHeatMap(c.Request.Context(), &event)
 			break
+		case "click":
+			err = g.onClick(c.Request.Context(), &event)
+			break
 		default:
 			c.JSON(400, gin.H{
 				"status":  "error",
