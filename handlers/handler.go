@@ -34,6 +34,9 @@ func (g *GinHandler) OnNekoSenseEvent() gin.HandlerFunc {
 		case "click":
 			err = g.onClick(c.Request.Context(), &event)
 			break
+		case "hover-to-click":
+			err = g.onHoverToClick(c.Request.Context(), &event)
+			break
 		default:
 			c.JSON(400, gin.H{
 				"status":  "error",

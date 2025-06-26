@@ -17,5 +17,5 @@ func MainRouter(router *gin.Engine, g *handlers.GinHandler) {
 	router.GET("/clicks", g.GetClicks())
 	router.GET("/performance", g.GetPagePerformances())
 	router.GET("/heat-map", g.GetHeatMaps())
-
+	router.GET("/hover-to-click", g.GetHoverToClick())
 }
