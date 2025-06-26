@@ -9,8 +9,8 @@ import (
 	"net/http"
 )
 
-func (g *GinHandler) onTimeOnPage(c context.Context, event *models.Event) error {
-	_, err := g.db.Collection("time_on_page").InsertOne(c, event)
+func (g *GinHandler) onPageView(c context.Context, event *models.Event) error {
+	_, err := g.db.Collection("page_view").InsertOne(c, event)
 	if err != nil {
 		log.Println(err)
 		return err
@@ -18,9 +18,9 @@ func (g *GinHandler) onTimeOnPage(c context.Context, event *models.Event) error 
 	return nil
 }
 
-func (g *GinHandler) GetTimeOnPage() gin.HandlerFunc {
+func (g *GinHandler) GetPageView() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		cursor, err := g.db.Collection("time_on_page").Find(c, bson.M{})
+		cursor, err := g.db.Collection("page_view").Find(c, bson.M{})
 		if err != nil {
 			log.Println("Failed to execute find command:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve clicks"})
